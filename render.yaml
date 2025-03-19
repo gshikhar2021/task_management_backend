@@ -1,0 +1,17 @@
+services:
+  - type: web
+    runtime: go
+    name: task-management-backend
+    plan: free
+    region: oregon # or any preferred region
+    buildCommand: |
+      go mod tidy
+      go build -o app .
+    startCommand: ./app
+    envVars:
+      - key: PORT
+        sync: false # Let Render assign the port dynamically
+      - key: MONGO_URI
+        sync: false # Set it in Render dashboard
+      - key: JWT_SECRET
+        sync: false # Set it in Render dashboard

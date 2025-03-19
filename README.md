@@ -3,6 +3,7 @@
 This is the backend for the Task Management application built using Golang, Gin, MongoDB, and WebSockets. The backend handles user authentication, task creation, assignment, and real-time notifications.
 
 ## Features
+
 - User authentication (Register/Login)
 - JWT-based authentication middleware
 - Task creation and assignment
@@ -12,6 +13,7 @@ This is the backend for the Task Management application built using Golang, Gin,
 - Deployment on Render
 
 ## Tech Stack
+
 - **Backend:** Golang, Gin framework
 - **Database:** MongoDB (MongoDB Atlas cluster)
 - **Real-time communication:** WebSockets
@@ -21,6 +23,7 @@ This is the backend for the Task Management application built using Golang, Gin,
 ---
 
 ## Folder Structure
+
 ```
 task_management/
 │── backend/
@@ -44,15 +47,19 @@ task_management/
 │   ├── go.sum
 │   ├── main.go
 ```
+
 ---
 
 ## Installation & Setup
+
 ### Prerequisites
+
 - Go installed (>= 1.18)
 - MongoDB Atlas or local MongoDB setup
 - Render account for deployment
 
 ### Steps to Run Locally
+
 1. Clone the repository:
    ```sh
    git clone https://github.com/your-username/task_management.git
@@ -71,14 +78,17 @@ task_management/
    ```sh
    go run main.go
    ```
+
 ---
 
 ## API Endpoints & Postman Testing
 
 ### 1. Register a User
+
 **Endpoint:** `POST /register`
 
 **Request Body:**
+
 ```json
 {
   "username": "shikhar_gupta",
@@ -87,18 +97,21 @@ task_management/
 ```
 
 **Response:**
+
 ```json
 {
   "message": "Signup successful"
 }
 ```
 
-![alt text](image.png)
+![alt text](Images/image.png)
 
 ### 2. Login
+
 **Endpoint:** `POST /login`
 
 **Request Body:**
+
 ```json
 {
   "username": "shikhar_gupta",
@@ -107,6 +120,7 @@ task_management/
 ```
 
 **Response:**
+
 ```json
 {
   "token": "your_jwt_token",
@@ -114,17 +128,20 @@ task_management/
 }
 ```
 
-![alt text](image-1.png)
+![alt text](Images/image-1.png)
 
 ### 3. Create a Task
+
 **Endpoint:** `POST /tasks/create`
 
 **Headers:**
+
 ```json
 Authorization: Bearer <jwt_token>
 ```
 
 **Request Body:**
+
 ```json
 {
   "title": "task1",
@@ -134,78 +151,90 @@ Authorization: Bearer <jwt_token>
 ```
 
 **Response:**
+
 ```json
 {
+  "id": "67daf3e42fe804a06f426041",
+  "message": "Task created",
+  "task": {
     "id": "67daf3e42fe804a06f426041",
-    "message": "Task created",
-    "task": {
-        "id": "67daf3e42fe804a06f426041",
-        "title": "task1",
-        "description": "No description",
-        "assigned_to": "user2",
-        "created_by": "shikhar_gupta",
-        "status": "Pending",
-        "created_at": 1742402532
-    }
+    "title": "task1",
+    "description": "No description",
+    "assigned_to": "user2",
+    "created_by": "shikhar_gupta",
+    "status": "Pending",
+    "created_at": 1742402532
+  }
 }
 ```
 
-![alt text](image-2.png)
-![alt text](image-3.png)
+![alt text](Images/image-2.png)
+![alt text](Images/image-3.png)
 
 ### 4. Get Assigned Tasks
+
 **Endpoint:** `GET /tasks`
 
 **Headers:**
+
 ```json
 Authorization: Bearer <jwt_token>
 ```
 
 **Response:**
+
 ```json
 [
-   {
-        "id": "67daf3e42fe804a06f426041",
-        "title": "task1",
-        "description": "No description",
-        "assigned_to": "user2",
-        "created_by": "shikhar_gupta",
-        "status": "Pending",
-        "created_at": 1742402532
-    }
+  {
+    "id": "67daf3e42fe804a06f426041",
+    "title": "task1",
+    "description": "No description",
+    "assigned_to": "user2",
+    "created_by": "shikhar_gupta",
+    "status": "Pending",
+    "created_at": 1742402532
+  }
 ]
 ```
 
-![alt text](image-4.png)
+![alt text](Images/image-4.png)
 
 ### 5. Mark Task as Done
+
 **Endpoint:** `PUT /tasks/:id/done`
 
 **Headers:**
+
 ```json
 Authorization: Bearer <jwt_token>
 ```
 
 **Response:**
+
 ```json
 {
   "message": "Task marked as done"
 }
 ```
 
-![alt text](image-5.png)
-![alt text](image-6.png)
+![alt text](Images/image-5.png)
+![alt text](Images/image-6.png)
 
 ### 6. Establish WebSocket Connection
+
 **Endpoint:** `GET /ws?username=<your_username>`
 
 **Description:**
+
 - This establishes a WebSocket connection for real-time task notifications.
-![alt text](image-7.png)
+  ![alt text](Images/image-7.png)
+
 ---
 
 ## Deployment on Render
+
 ### Steps to Deploy
+
 1. Initialize a Git repository (if not already):
    ```sh
    git init
@@ -220,6 +249,7 @@ Authorization: Bearer <jwt_token>
 3. Log in to [Render](https://dashboard.render.com/) and create a new **Web Service**.
 4. Connect your GitHub repository.
 5. Set up the `render.yaml` file:
+
    ```yaml
    services:
      - type: web
@@ -240,25 +270,19 @@ Authorization: Bearer <jwt_token>
            sync: false
    ```
 
-7. Add **MONGO_URI** and **JWT_SECRET** in Render’s environment variables.
-8. Deploy the service and note the Render-provided URL.
+6. Add **MONGO_URI** and **JWT_SECRET** in Render’s environment variables.
+7. Deploy the service and note the Render-provided URL.
 
 Your backend is now live! 🎉
 
 ---
 
-## Future Improvements
-- Implement user roles (Admin, Regular User)
-- Add task due dates and priorities
-- Implement email notifications
-- Build the frontend with React and integrate it with this backend
-
----
-
 ## License
+
 This project is licensed under the MIT License.
 
 ---
 
 ## Author
-Your Name - [GitHub](https://github.com/your-username)
+
+Your Name - [GitHub](https://github.com/gshikhar2021)
